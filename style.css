@@ -1,14 +1,58 @@
+/* General Styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
+
+/* Navigation Bar */
 nav {
-    margin-bottom: 20px;
-}
-table {
-    margin: auto;
-    border-collapse: collapse;
-}
-th, td {
+    background-color: #007BFF;
     padding: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 18px;
+}
+
+nav a:hover {
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+/* Main Content */
+h1 {
+    margin-top: 20px;
+    color: #007BFF;
+}
+
+p {
+    font-size: 22px;
+}
+
+/* Temperature & Color Display */
+.status {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px;
+    display: inline-block;
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+/* Color Change for White and Red */
+.white {
+    background-color: white;
+    color: black;
+}
+
+.red {
+    background-color: red;
+    color: white;
 }
