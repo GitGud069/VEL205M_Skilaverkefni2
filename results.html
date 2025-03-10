@@ -3,17 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Sensor Data</title>
+    <title>Live Temperature & Color Data</title>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .status { font-size: 20px; font-weight: bold; padding: 10px; }
+        .white { background-color: white; color: black; }
+        .red { background-color: red; color: white; }
+        nav { margin-bottom: 20px; font-size: 18px; }
+        nav a { text-decoration: none; padding: 10px; color: blue; }
+    </style>
 </head>
 <body>
-    <h1>Live Sensor Data</h1>
+    <h1>Welcome to My Live Streaming Website</h1>
+    
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="index.html">Home</a> | 
+        <a href="results.html">Measurement Results</a> | 
+        <a href="diary.html">Diary (Private)</a>
+    </nav>
+
+    <h2>Live Temperature & Color Data</h2>
     <p>Temperature: <span id="temp">Loading...</span>°C</p>
-    <p>Humidity: <span id="humidity">Loading...</span>%</p>
+    <p>Color State: <span id="color" class="status">Loading...</span></p>
+
+    <!-- Twitch Live Stream Embed -->
+    <h2>Live Stream</h2>
+    <iframe 
+        src="https://player.twitch.tv/?channel=yourusername&parent=yourgithubusername.github.io" 
+        height="400" width="600" allowfullscreen>
+    </iframe>
+
+    <!-- Twitch Live Chat -->
+    <h2>Live Chat</h2>
+    <iframe 
+        src="https://www.twitch.tv/embed/yourusername/chat?parent=yourgithubusername.github.io" 
+        height="300" width="600">
+    </iframe>
 
     <script>
-        // Firebase Config
+        // Firebase Configuration
         var firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "live-measurements-a82ab.firebaseapp.com",
@@ -29,8 +60,11 @@
         var database = firebase.database();
 
         function updateData(snapshot) {
-            document.getElementById("temp").innerText = snapshot.val().temperature;
-            document.getElementById("humidity").innerText = snapshot.val().humidity;
+            var data = snapshot.val();
+            document.getElementById("temp").innerText = data.temperature;
+            var colorElement = document.getElementById("color");
+            colorElement.innerText = data.color;
+            colorElement.className = "status " + data.color;  // Change background color
         }
 
         // Listen for live updates
