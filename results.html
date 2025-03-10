@@ -3,22 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Temperature & Color Data</title>
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .status { font-size: 20px; font-weight: bold; padding: 10px; }
-        .white { background-color: white; color: black; }
-        .red { background-color: red; color: white; }
-        nav { margin-bottom: 20px; font-size: 18px; }
-        nav a { text-decoration: none; padding: 10px; color: blue; }
-    </style>
+    <title>Live Streaming Website</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Welcome to My Live Streaming Website</h1>
-    
-    <!-- Navigation Menu -->
     <nav>
         <a href="index.html">Home</a> | 
         <a href="results.html">Measurement Results</a> | 
@@ -28,20 +17,6 @@
     <h2>Live Temperature & Color Data</h2>
     <p>Temperature: <span id="temp">Loading...</span>°C</p>
     <p>Color State: <span id="color" class="status">Loading...</span></p>
-
-    <!-- Twitch Live Stream Embed -->
-    <h2>Live Stream</h2>
-    <iframe 
-        src="https://player.twitch.tv/?channel=livedragonzero&parent=GitGud069.github.io" 
-        height="400" width="600" allowfullscreen>
-    </iframe>
-
-    <!-- Twitch Live Chat -->
-    <h2>Live Chat</h2>
-    <iframe 
-        src="https://www.twitch.tv/embed/livedragonzero/chat?parent=GitGud069.github.io" 
-        height="300" width="600">
-    </iframe>
 
     <script>
         // Firebase Configuration
