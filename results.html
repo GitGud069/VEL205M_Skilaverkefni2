@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Streaming Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Live Temperature & Color Data</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 20px; }
+        nav { font-size: 18px; margin-bottom: 20px; }
+        nav a { text-decoration: none; padding: 10px; color: blue; }
+        .status { font-size: 24px; font-weight: bold; padding: 15px; display: inline-block; }
+        .white { background-color: white; color: black; border: 2px solid black; }
+        .red { background-color: red; color: white; border: 2px solid black; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Live Streaming Website</h1>
+
+    <!-- Navigation Links -->
     <nav>
         <a href="index.html">Home</a> | 
         <a href="results.html">Measurement Results</a> | 
         <a href="diary.html">Diary (Private)</a>
     </nav>
 
-    <h2>Live Temperature & Color Data</h2>
+    <!-- Live Data Display -->
     <p>Temperature: <span id="temp">Loading...</span>°C</p>
     <p>Color State: <span id="color" class="status">Loading...</span></p>
 
@@ -35,15 +45,21 @@
         var database = firebase.database();
 
         function updateData(snapshot) {
-            var data = snapshot.val();
-            document.getElementById("temp").innerText = data.temperature;
-            var colorElement = document.getElementById("color");
-            colorElement.innerText = data.color;
-            colorElement.className = "status " + data.color;  // Change background color
+            if (snapshot.exists()) {
+                var data = snapshot.val();
+                document.getElementById("temp").innerText = data.temperature;
+                var colorElement = document.getElementById("color");
+                colorElement.innerText = data.color;
+                colorElement.className = "status " + data.color;  // Update color background
+            } else {
+                document.getElementById("temp").innerText = "No data available";
+                document.getElementById("color").innerText = "No data available";
+            }
         }
 
         // Listen for live updates
         database.ref("measurements").on("value", updateData);
     </script>
+
 </body>
 </html>
